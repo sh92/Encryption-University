@@ -37,7 +37,6 @@ unsigned int des(TALK* message,  unsigned int msg_len, int mode){
     return result;
 }
 
-
 void * send_msg(void * arg)
 {
 	int sock = (int)arg;
@@ -52,6 +51,7 @@ void * send_msg(void * arg)
 		memset(msg.msg, 0x0, MSG_SIZE);
 	}
 }
+
 
 void * recv_msg(void * arg)
 {
@@ -69,6 +69,7 @@ void * recv_msg(void * arg)
 		fprintf(stdout, "[%s] %s", tmp.name, tmp.msg);
 	}
 }
+
 
 int main(int argc, char *argv[])
 {
@@ -99,6 +100,7 @@ int main(int argc, char *argv[])
 	if ( -1 == connect(serv_sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) ) {
 		fprintf(stderr, "[!] ERROR : Connect()\n");
 	}
+
 
 	pthread_create(&send_thread, NULL, send_msg, (void *)serv_sock);
 	pthread_create(&recv_thread, NULL, recv_msg, (void *)serv_sock);
